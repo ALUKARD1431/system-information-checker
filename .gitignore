@@ -1,0 +1,5 @@
+.venv/
+.idea/
+__pycache__/
+*.pyc
+system_info.json
