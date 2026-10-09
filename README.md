@@ -1,48 +1,69 @@
 # System Information Checker
 
-Ein kleines Python-Tool zur automatisierten Erfassung grundlegender System- und Netzwerkinformationen.
+Ein plattformübergreifendes Python-Tool zur Erfassung grundlegender System- und Netzwerkinformationen unter macOS, Linux und Windows.
 
 ## Funktionen
 
-* Erkennung des Betriebssystems und Computernamens
-* Erkennung von CPU und Arbeitsspeicher (RAM)
-* Anzeige des gesamten, belegten und freien Speicherplatzes
-* Ermittlung der lokalen IPv4-Adresse
-* Einfache Prüfung der Netzwerkverbindung mit ping
-* Speicherung der gesammelten Informationen als JSON-Datei
+- Erkennung des Betriebssystems und Computernamens
+- Erkennung der CPU-Architektur und des Prozessormodells, sofern verfügbar
+- Ermittlung der Anzahl logischer Prozessoren
+- Erfassung des gesamten Arbeitsspeichers (RAM)
+- Anzeige des gesamten, belegten und freien Speicherplatzes
+- Ermittlung der lokalen IP-Adresse
+- Prüfung der Netzwerkverbindung mithilfe von `ping`
+- Speicherung der gesammelten Informationen im JSON-Format
+
+## Unterstützte Betriebssysteme
+
+- macOS
+- Linux
+- Windows
+
+Das Programm verwendet je nach Betriebssystem unterschiedliche Methoden, um Systeminformationen abzurufen. Welche Details verfügbar sind, hängt auch von der Hardware und der verwendeten Virtualisierungsumgebung ab.
 
 ## Verwendete Technologien
 
-* Python
-* Python Standard Library
-* platform
-* subprocess
-* shutil
-* socket
-* json
+- Python 3
+- Python-Standardbibliothek
+- `platform`
+- `subprocess`
+- `shutil`
+- `socket`
+- `json`
+- `ctypes` (für Windows-spezifische Systeminformationen)
 
-## Ziel des Projekts
+Es werden keine zusätzlichen Python-Pakete benötigt.
 
-Dieses Projekt wurde als praktische Python-Übung entwickelt, um Kenntnisse in den Bereichen Systemadministration, Netzwerkdiagnose und Automatisierung anzuwenden und zu vertiefen.
+## Verwendung
 
-Die Themen sind besonders relevant für eine Ausbildung zum Fachinformatiker für Systemintegration.
+**macOS und Linux:**
 
-## Beispielausgabe
+```bash
+python3 system_checker.py
+```
 
-Das Programm erstellt eine system_info.json-Datei mit strukturierten Systeminformationen.
+**Windows:**
 
-Die automatisch erzeugte JSON-Datei wird über .gitignore vom Git-Repository ausgeschlossen, da sie maschinenspezifische Informationen wie den Computernamen und die lokale IP-Adresse enthalten kann.
+```powershell
+py system_checker.py
+```
 
-## Plattform
+Das Programm gibt die ermittelten Informationen im Terminal aus und erstellt die Datei `system_info.json` im aktuellen Arbeitsverzeichnis.
 
-Das Projekt wurde unter macOS entwickelt und getestet.
+## JSON-Ausgabe
 
-Einige verwendete Systembefehle, wie sysctl und ipconfig, sind macOS-spezifisch.
+Die Datei `system_info.json` enthält strukturierte Informationen über das System, darunter Betriebssystem, Computername, CPU, Prozessoranzahl, RAM, Festplattenbelegung, lokale IP-Adresse und das Ergebnis der Netzwerkprüfung.
 
-## Mögliche Erweiterungen
+Die automatisch erzeugte JSON-Datei wird nicht in das Git-Repository aufgenommen, da sie systemspezifische Informationen wie den Computernamen und die lokale IP-Adresse enthalten kann.
 
-* Unterstützung für Windows und Linux
-* Detailliertere Netzwerkdiagnose
-* Automatische Erkennung der verwendeten Netzwerkschnittstelle
-* Weitere Systeminformationen
-* Erweiterte Fehlerbehandlung
+## Einschränkungen
+
+- Das genaue Prozessormodell ist nicht auf jedem System verfügbar, insbesondere in virtuellen Maschinen.
+- Ein fehlgeschlagener Ping bedeutet nicht zwingend, dass keine Internetverbindung besteht. ICMP-Anfragen können beispielsweise durch Firewalls blockiert werden.
+- Die lokale IP-Adresse kann unter bestimmten Netzwerkbedingungen nicht ermittelt werden.
+
+## Projektziel
+
+Dieses Projekt dient als praktische Python-Übung und vertieft Kenntnisse in den Bereichen Systemadministration, Netzwerkdiagnose und Automatisierung.
+
+Die behandelten Themen sind besonders relevant für eine Ausbildung zum Fachinformatiker für Systemintegration.
